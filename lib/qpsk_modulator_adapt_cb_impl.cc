@@ -68,26 +68,26 @@ namespace gr {
     	{
     		if (sample == 0)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2);
+    			tmp.real(sqrt(2)/2);
     			return tmp;
     		}
     		else if (sample == 1)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2)  ;
+    			tmp.real(-sqrt(2)/2)  ;
     			return tmp;
     		}
     		else if (sample == 2)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 3)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     	}
@@ -95,26 +95,26 @@ namespace gr {
     	{
     		if (sample == 3)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 2)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 0)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 1)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     	}
@@ -122,26 +122,26 @@ namespace gr {
     	{
     		if (sample == 1)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 0)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 3)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 2)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     	}
@@ -149,26 +149,26 @@ namespace gr {
     	{
     		if (sample == 2)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 3)
     		{
-    			tmp.imag() = sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 1)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = -sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(-sqrt(2)/2) ;
     			return tmp;
     		}
     		else if (sample == 0)
     		{
-    			tmp.imag() = -sqrt(2)/2;
-    			tmp.real() = sqrt(2)/2;
+    			tmp.imag(-sqrt(2)/2) ;
+    			tmp.real(sqrt(2)/2) ;
     			return tmp;
     		}
     	}
