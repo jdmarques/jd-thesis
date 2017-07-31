@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Jul 12 14:33:13 2017
+# Generated: Mon Jul 31 11:08:46 2017
 ##################################################
 
 if __name__ == '__main__':
@@ -255,10 +255,10 @@ class top_block(gr.top_block, Qt.QWidget):
         self.blocks_throttle_0_1 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_throttle_0_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_gr_complex*1, samp_rate,True)
-        self.analog_const_source_x_0_2 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 3)
-        self.analog_const_source_x_0_1 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 2)
-        self.analog_const_source_x_0_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 1)
-        self.analog_const_source_x_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 0)
+        self.analog_const_source_x_0_2 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 4)
+        self.analog_const_source_x_0_1 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 3)
+        self.analog_const_source_x_0_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 2)
+        self.analog_const_source_x_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 1)
 
         ##################################################
         # Connections
