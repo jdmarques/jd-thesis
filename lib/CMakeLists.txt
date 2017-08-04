@@ -28,7 +28,7 @@ list(APPEND meu_sources
     qpsk_demod_adapt_cb_impl.cc
     qpsk_modulator_adapt_cb_impl.cc
     phase_finder_vci_impl.cc
-    )
+    phase_offset_cf_impl.cc )
 
 set(meu_sources "${meu_sources}" PARENT_SCOPE)
 if(NOT meu_sources)

@@ -12,6 +12,7 @@
 #include "meu/qpsk_demod_adapt_cb.h"
 #include "meu/qpsk_modulator_adapt_cb.h"
 #include "meu/phase_finder_vci.h"
+#include "meu/phase_offset_cf.h"
 %}
 
 
@@ -24,3 +25,5 @@ GR_SWIG_BLOCK_MAGIC2(meu, qpsk_modulator_adapt_cb);
 %include "meu/phase_finder_vci.h"
 GR_SWIG_BLOCK_MAGIC2(meu, phase_finder_vci);
 
+%include "meu/phase_offset_cf.h"
+GR_SWIG_BLOCK_MAGIC2(meu, phase_offset_cf);

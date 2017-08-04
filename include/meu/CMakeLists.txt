@@ -25,5 +25,5 @@ install(FILES
     qpsk_demod_adapt_cb.h
     qpsk_modulator_adapt_cb.h
     phase_finder_vci.h
-    DESTINATION include/meu
+    phase_offset_cf.h DESTINATION include/meu
 )

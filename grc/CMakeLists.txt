@@ -20,5 +20,5 @@ install(FILES
     meu_qpsk_demod_adapt_cb.xml
     meu_qpsk_modulator_adapt_cb.xml
     meu_phase_finder_vci.xml
-    DESTINATION share/gnuradio/grc/blocks
+    meu_phase_offset_cf.xml DESTINATION share/gnuradio/grc/blocks
 )

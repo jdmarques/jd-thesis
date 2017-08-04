@@ -43,7 +43,10 @@ namespace gr {
       : gr::block("qpsk_demod_adapt_cb",
               gr::io_signature::make2(2, 2, sizeof(gr_complex), sizeof(int32_t) ),
               gr::io_signature::make(1, 1, sizeof(char)))
-    {set_tag_propagation_policy(TPP_ALL_TO_ALL);}
+    {
+      set_tag_propagation_policy(TPP_ALL_TO_ALL);
+      set_relative_rate(1.0);
+    }
 
     /*
      * Our virtual destructor.
@@ -68,63 +71,63 @@ namespace gr {
     	if (adapt_ref == 1)
     	{
 			if (sample.imag() >= 0 and sample.real() >= 0) {
-				return 0x00;
+				return 0x0;
 			}
 			else if (sample.imag() >= 0 and sample.real() < 0) {
-				return 0x01;
+				return 0x1;
 			}
 			else if (sample.imag() < 0 and sample.real() < 0) {
-	  			return 0x03;
+	  			return 0x3;
 			}
 			else if (sample.imag() < 0 and sample.real() >= 0) {
-	  			return 0x02;
+	  			return 0x2;
 			}
     	}
 
     	else if (adapt_ref == 2){
 
     		if (sample.imag() >= 0 and sample.real() >= 0) {
-				return 0x02;
+				return 0x2;
 			}
 			else if (sample.imag() >= 0 and sample.real() < 0) {
-				return 0x00;
+				return 0x0;
 			}
 			else if (sample.imag() < 0 and sample.real() < 0) {
-	  			return 0x01;
+	  			return 0x1;
 			}
 			else if (sample.imag() < 0 and sample.real() >= 0) {
-	  			return 0x03;
+	  			return 0x3;
 			}
 
     	}
 
 		else if (adapt_ref == 4){
     		if (sample.imag() >= 0 and sample.real() >= 0) {
-				return 0x01;
+				return 0x1;
 			}
 			else if (sample.imag() >= 0 and sample.real() < 0) {
-				return 0x03;
+				return 0x3;
 			}
 			else if (sample.imag() < 0 and sample.real() < 0) {
-	  			return 0x02;
+	  			return 0x2;
 			}
 			else if (sample.imag() < 0 and sample.real() >= 0) {
-	  			return 0x00;
+	  			return 0x0;
 			}
 
 		}
     	else if (adapt_ref == 3){
     		if (sample.imag() >= 0 and sample.real() >= 0) {
-				return 0x03;
+				return 0x3;
 			}
 			else if (sample.imag() >= 0 and sample.real() < 0) {
-				return 0x02;
+				return 0x2;
 			}
 			else if (sample.imag() < 0 and sample.real() < 0) {
-	  			return 0x00;
+	  			return 0x0;
 			}
 			else if (sample.imag() < 0 and sample.real() >= 0) {
-	  			return 0x01;
+	  			return 0x1;
 			}	  	
     }}
 

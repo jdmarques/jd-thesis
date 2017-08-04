@@ -22,81 +22,84 @@
 #include "config.h"
 #endif
 
-#include <gnuradio/expj.h>
 #include <gnuradio/io_signature.h>
-#include "phase_finder_vci_impl.h"
+#include <gnuradio/expj.h>
+#include "phase_offset_cf_impl.h"
 
-#define M_TWOPI (2*M_PI)
-
-static const pmt::pmt_t CARR_OFFSET_KEY = pmt::mp("ofdm_sync_carr_offset");
+static const pmt::pmt_t CHAN_TAPS_KEY = pmt::mp("ofdm_sync_chan_taps");
 
 namespace gr {
   namespace meu {
 
-    phase_finder_vci::sptr
-    phase_finder_vci::make(int cp_len, int fft_len)
+    phase_offset_cf::sptr
+    phase_offset_cf::make(const std::string &lengthtagname){
+      return gnuradio::get_initial_sptr(new phase_offset_cf_impl(lengthtagname));
+    }
+    phase_offset_cf_impl::phase_offset_cf_impl(const std::string &lengthtagname)
+    : gr::tagged_stream_block("phase_offset_cf",
+      gr::io_signature::make(1, 1, sizeof(gr_complex)),
+      gr::io_signature::make(1, 1, sizeof(float)),lengthtagname), 
+    d_channel_state(64, gr_complex(1, 0))
     {
-      return gnuradio::get_initial_sptr
-      (new phase_finder_vci_impl(cp_len, fft_len));
+     // if (tsb_key.empty()) 
+     // {
+     //   throw std::invalid_argument("Specify a TSB tag!");
+     //  }
+     // set_relative_rate(1.0);
+      set_tag_propagation_policy(TPP_ONE_TO_ONE);
     }
 
-    /*
-     * The private constructor
-     */
-    phase_finder_vci_impl::phase_finder_vci_impl(int cp_len, int fft_len)
-    : gr::block("phase_finder_vci",
-      gr::io_signature::make(1, 1, sizeof (gr_complex) * fft_len),
-      gr::io_signature::make(1, 1, sizeof(int))),
-    d_cp_len(cp_len),
-    d_fft_len(fft_len),
-    d_channel_state(fft_len, gr_complex(1, 0))
-    { set_tag_propagation_policy(TPP_DONT);}
-
-    /*
-     * Our virtual destructor.
-     */
-    phase_finder_vci_impl::~phase_finder_vci_impl()
+    phase_offset_cf_impl::~phase_offset_cf_impl()
     {
     }
-
-    void
-    phase_finder_vci_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
-    {
-      ninput_items_required[0] = noutput_items;
-    }
-
-
-    int
-    phase_finder_vci_impl::get_ref_phase(const gr_complex &sample)
+ /*
+      void
+      phase_offset_cf_impl::parse_length_tags(
+        const std::vector<std::vector<tag_t> > &tags,
+        gr_vector_int &n_input_items_reqd
+        ) {
+        if (tags[0].key == pmt::string_to_symbol(d_length_tag_key_str)) 
+        {
+          n_input_items_reqd[0] = pmt::to_long(tags[0].value);
+        }
+      }
+*/
+    float
+    phase_offset_cf_impl::get_ref_phase(const gr_complex &sample)
     {
        /* since phase_correction is a complex number uses the value of imag and real components to check in which quadrant it is */
       if (sample.imag() >= 0 and sample.real() >= 0) {
-        return 2;
+        return 0;
       }
       else if (sample.imag() >= 0 and sample.real() < 0) {
-        return 1;
+        return (1.5708);
       }
       else if (sample.imag() < 0 and sample.real() < 0) {
-        return 3;
+        return (3.14159);
       }
       else if (sample.imag() < 0 and sample.real() >= 0) {
-        return 4;
+        return (4.71239);
       }
 
     }
 
     int
-    phase_finder_vci_impl::general_work (int noutput_items,
+    phase_offset_cf_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
+    {
+      return ninput_items[0];
+    }
+
+    int
+    phase_offset_cf_impl::work (int noutput_items,
      gr_vector_int &ninput_items,
      gr_vector_const_void_star &input_items,
      gr_vector_void_star &output_items)
     {
       const gr_complex *in = (const gr_complex *) input_items[0];
-      int *out = (int *) output_items[0];
-      int carrier_offset = 0;
-      int fft_len = d_fft_len;
+      float *out = (float *) output_items[0];
+      //gr_complex *out = (gr_complex *) output_items[0];
+      long packet_length = ninput_items[0]; // the exact number of this PDU, all of these items will be consumed 
 
-      // get tags will get the value of carrier offset that was propagated in the tag 
       std::vector<tag_t> tags;
       get_tags_in_window(tags, 0, 0, 1);
       for (unsigned i = 0; i < tags.size(); i++) {
@@ -105,18 +108,13 @@ namespace gr {
         }
       }
 
-      // Correct the frequency shift on the symbols
-     // gr_complex phase_correction;
-      for (int i = 0; i < noutput_items; i++) {
-      // phase_correction = gr_expj(-M_TWOPI * carrier_offset * d_cp_len / d_fft_len * (i+1));
-       // out[i] = get_ref_phase(phase_correction); /* phase reference output*/
-       out[i]= get_ref_phase(d_channel_state[12]);
+      for (int i = 0; i < packet_length; i++) {
+       out[i]= get_ref_phase(d_channel_state[6]);
+       //out[i]= d_channel_state[6];
      }
 
-     consume_each (noutput_items);
-
       // Tell runtime system how many output items we produced.
-     return noutput_items;
+     return packet_length;
    }
 
   } /* namespace meu */
