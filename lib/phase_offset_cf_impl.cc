@@ -46,7 +46,7 @@ namespace gr {
      //   throw std::invalid_argument("Specify a TSB tag!");
      //  }
      // set_relative_rate(1.0);
-      set_tag_propagation_policy(TPP_ONE_TO_ONE);
+      set_tag_propagation_policy(TPP_DONT);
     }
 
     phase_offset_cf_impl::~phase_offset_cf_impl()
@@ -86,7 +86,8 @@ namespace gr {
     int
     phase_offset_cf_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
-      return ninput_items[0];
+      //return (ninput_items[0]);
+    	return 400 ;
     }
 
     int
@@ -98,7 +99,8 @@ namespace gr {
       const gr_complex *in = (const gr_complex *) input_items[0];
       float *out = (float *) output_items[0];
       //gr_complex *out = (gr_complex *) output_items[0];
-      long packet_length = ninput_items[0]; // the exact number of this PDU, all of these items will be consumed 
+      //long packet_length = ninput_items[0]; // the exact number of this PDU, all of these items will be consumed 
+      long packet_length = 400 ;
 
       std::vector<tag_t> tags;
       get_tags_in_window(tags, 0, 0, 1);

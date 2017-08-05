@@ -46,7 +46,7 @@ namespace gr {
        * class. meu::phase_offset_cf::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const std::string &tsb_key="frame_len");
+      static sptr make(const std::string &lengthtagname="frame_len");
     };
 
   } // namespace meu
